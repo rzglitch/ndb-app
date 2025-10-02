@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>글 목록</h2>
+  <ul class="posts">
+    <% posts.forEach(post => { %>
+      <li id="p-<%= post._id %>">
+        <a class="category" href="/?category=<%= post.category %>"><%= post.category || '없음' %></a>
+        <a href="/post/<%= post._id %>"><%= post.title %></a><br />
+        <%= post.author %> <span class="date">(<%= formatDate(post.createdAt).formatted %>)</span>
+        <script>document.querySelector('#p-<%= post._id %> .date').textContent = `(${dayjs.unix(<%= formatDate(post.createdAt).timestamp %>).format()})`</script>
+      </li>
+    <% }) %>
+    <% if (!posts.length) { %>
+    <li>글이 없습니다.</li>
+    <% } %>
+  </ul>
+
+  <!-- pagination -->
+  <div class="pagination">
+    <% if (currentPage > 1) { %>
+      <a href="/?page=<%= currentPage - 1 %><% if (category) { %>&category=<%= category %><% } %>">이전</a>
+    <% } %>
+
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <% if (i === currentPage) { %>
+        <span><%= i %></span>
+      <% } else { %>
+        <a href="/?page=<%= i %><% if (category) { %>&category=<%= category %><% } %>"><%= i %></a>
+      <% } %>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+      <a href="/?page=<%= currentPage + 1 %><% if (category) { %>&category=<%= category %><% } %>">다음</a>
+    <% } %>
+  </div>
+</div>

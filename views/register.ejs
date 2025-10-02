@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>회원가입</h2>
+  <form action="/register" method="POST">
+    <input type="hidden" name="_token" value="<%= token %>" />
+    <input type="text" name="username" placeholder="아이디" required /><br /><br />
+    <input type="password" name="password" placeholder="비밀번호" required /><br /><br />
+    <input type="email" name="email" placeholder="이메일" required /><br /><br />
+    <button type="submit">가입하기</button>
+  </form>
+</div>

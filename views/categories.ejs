@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>카테고리</h2>
+
+  <% if (currentUser) { %>
+  <form action="/category" method="POST">
+    <input type="hidden" name="_token" value="<%= token %>" />
+    <input type="text" name="name" placeholder="새 카테고리 이름" required />
+    <button type="submit">추가</button>
+  </form>
+  <% } %>
+
+  <ul>
+    <% categories.forEach(cat => { %>
+      <li>
+        <a href="/?category=<%= cat.name %>"><%= cat.name %></a>
+        <% if (currentUser) { %>
+        <form action="/category/<%= cat._id %>/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="_token" value="<%= token %>" />
+          <button type="submit">삭제</button>
+        </form>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</div>

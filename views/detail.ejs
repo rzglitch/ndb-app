@@ -1,0 +1,18 @@
+<div class="container" id="p-<%= post._id %>">
+  <h2><%= post.title %></h2>
+  <p><b>작성자:</b> <%= post.author %><br />
+  <span class="date"><%= formatDate(post.createdAt).formatted %></span></p>
+  <script>document.querySelector('#p-<%= post._id %> .date').textContent = `${dayjs.unix(<%= formatDate(post.createdAt).timestamp %>).format()}`</script>
+  <div class="content"><%- post.content %></div>
+</div>
+<hr />
+<div class="container">
+  <% if (currentUser) { %>
+    <a href="/post/<%= post._id %>/edit">수정</a>
+    <form action="/post/<%= post._id %>?_method=DELETE" method="POST" style="display:inline;">
+      <input type="hidden" name="_token" value="<%= token %>" />
+      <button type="submit">삭제</button>
+    </form>
+  <% } %>
+  <a href="/">목록</a>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>새 글 작성</h2>
+  <form action="/" method="POST">
+    <input type="hidden" name="_token" value="<%= token %>" />
+    <label>카테고리 선택:</label>
+    <select name="category" required>
+      <% categories.forEach(cat => { %>
+        <option value="<%= cat.name %>"><%= cat.name %></option>
+      <% }) %>
+    </select>
+    <select name="status" required>
+      <option value="">상태</option>
+      <option value="public">공개</option>
+      <option value="private" selected>비공개</option>
+    </select><br /><br />
+    <br /><br />
+    <input type="text" name="title" placeholder="제목" style="width:100%;box-sizing:border-box" required /><br /><br />
+    <textarea name="content" id="summernote" placeholder="내용" required></textarea><br /><br />
+    <script>
+      $(document).ready(function() {
+        $('#summernote').summernote();
+      });
+    </script>
+    <button type="submit">등록</button>
+  </form>
+</div>
