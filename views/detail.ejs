@@ -1,9 +1,11 @@
 <div class="container" id="p-<%= post._id %>">
-  <h2><%= post.title %></h2>
+  <header><h2><%= post.title %></h2></header>
   <p><b>작성자:</b> <%= post.author %><br />
   <span class="date"><%= formatDate(post.createdAt).formatted %></span></p>
   <script>document.querySelector('#p-<%= post._id %> .date').textContent = `${dayjs.unix(<%= formatDate(post.createdAt).timestamp %>).format()}`</script>
-  <div class="content"><%- post.content %></div>
+  <div class="content">
+    <article><%- post.content %></article>
+  </div>
 </div>
 <hr />
 <div class="container">

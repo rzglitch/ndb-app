@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -17,6 +18,11 @@ mongoose
   .catch((err) => console.error(err));
 
 // 미들웨어
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,6 +46,7 @@ app.use(expressLayouts);
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.user;
+  res.locals.defaultHost = process.env.HOST;
   next();
 });
 

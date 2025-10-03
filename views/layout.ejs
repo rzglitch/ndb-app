@@ -7,8 +7,27 @@
   <link rel="stylesheet" href="/css/default.css" />
   <link rel="stylesheet" href="/summernote/summernote-lite.min.css" />
   <script src="/js/dayjs.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/summernote/summernote-lite.min.js"></script>
+
+  <!-- SEO -->
+  <% if (typeof seo !== 'undefined') { %>
+  <meta name="description" content="<%= seo.content %>" />
+	<meta property="url" content="<%= defaultHost %>/post/<%= post._id %>"/>
+	<meta property="og:url" content="<%= defaultHost %>/post/<%= post._id %>" />
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="<%= seo.title %>" />
+	<meta property="og:description" content="<%= seo.content %>" />
+	<meta property="og:image" content="<%= defaultHost %>/img/cover.jpg" />
+  <% } else { %>
+  <meta name="description" content="My personal blog" />
+	<meta property="url" content="<%= defaultHost %>"/>
+	<meta property="og:url" content="<%= defaultHost %>" />
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="kh.me.kr" />
+	<meta property="og:description" content="My personal blog" />
+	<meta property="og:image" content="<%= defaultHost %>/img/cover.jpg" />
+  <% } %>
 </head>
 <body>
   <header>

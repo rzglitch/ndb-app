@@ -8,6 +8,7 @@ const Post = require('../models/Post');
 const Category = require('../models/Category');
 const requireLogin = require('../middleware/auth');
 const sanitizeHtml = require('sanitize-html');
+const htmlToText = require('html-to-text');
 
 const xsrf = require('../middleware/xsrf');
 
@@ -77,11 +78,20 @@ router.get('/post/:id', async (req, res) => {
         err: { message: '글을 찾을 수 없습니다.' },
       });
 
+    const textOptions = {
+      wordwrap: false,
+    };
     post.content = sanitizeHtml(post.content);
-    res.render('detail', { post, token, formatDate });
+    const contentText = htmlToText.convert(post.content, textOptions);
+    const seo = {
+      title: post.title,
+      content: contentText,
+    };
+    res.render('detail', { post, seo, token, formatDate });
   } catch (e) {
-    return res.status(404).render('error', {
-      err: { message: '글을 찾을 수 없습니다.' },
+    console.log(e);
+    return res.status(400).render('error', {
+      err: { message: '내부 오류가 발생했습니댜.' },
     });
   }
 });
