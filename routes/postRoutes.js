@@ -84,8 +84,8 @@ router.get('/post/:id', async (req, res) => {
     post.content = sanitizeHtml(post.content);
     const contentText = htmlToText.convert(post.content, textOptions);
     const seo = {
-      title: post.title,
-      content: contentText,
+      title: post.title.trim(),
+      content: contentText.replaceAll('\n', ' ').trim(),
     };
     res.render('detail', { post, seo, token, formatDate });
   } catch (e) {
