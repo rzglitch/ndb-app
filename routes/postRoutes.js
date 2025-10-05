@@ -9,6 +9,7 @@ const Category = require('../models/Category');
 const requireLogin = require('../middleware/auth');
 const sanitizeHtml = require('sanitize-html');
 const htmlToText = require('html-to-text');
+const markdownit = require('markdown-it');
 
 const xsrf = require('../middleware/xsrf');
 
@@ -57,12 +58,18 @@ router.get('/create', requireLogin, async (req, res) => {
 
 // 글 작성 처리
 router.post('/', requireLogin, xsrf, async (req, res) => {
+  // Markdown 모드 여부
+  let isMarkdown = false;
+  if (parseInt(req.body.is_markdown)) isMarkdown = true;
+  console.log(isMarkdown);
+
   await Post.create({
     title: req.body.title,
     content: req.body.content,
     author: req.session.user.username,
     category: req.body.category,
     status: req.body.status,
+    isMarkdown: isMarkdown,
   });
   res.redirect('/');
 });
@@ -81,6 +88,14 @@ router.get('/post/:id', async (req, res) => {
     const textOptions = {
       wordwrap: false,
     };
+
+    // Markdown 모드인 경우
+    if (post.isMarkdown || false) {
+      const md = markdownit();
+      post.content = md.render(post.content);
+      console.log('markdown');
+    }
+
     post.content = sanitizeHtml(post.content);
     const contentText = htmlToText.convert(post.content, textOptions);
     const seo = {

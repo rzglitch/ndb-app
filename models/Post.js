@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema({
   category: { type: String, default: '일반' },
   createdAt: { type: Date, default: Date.now },
   status: { type: String, required: true },
+  isMarkdown: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('Post', postSchema);
