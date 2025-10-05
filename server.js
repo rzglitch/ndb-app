@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const fileStoreOptions = {};
 
+app.enable('trust proxy');
 app.use(
   session({
     secret: process.env.SESS_SECRET, // 환경변수로 관리 권장
