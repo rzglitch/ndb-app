@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const router = express.Router();
 const Category = require('../models/Category');
 const xsrf = require('../middleware/xsrf');
-const requireLogin = require('../middleware/auth');
+const { requireLogin } = require('../middleware/auth');
 
 // 카테고리 목록
 router.get('/categories', async (req, res) => {
