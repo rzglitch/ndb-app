@@ -30,8 +30,10 @@
             $('#summernote').summernote('destroy');
             simplemde = new SimpleMDE({ spellChecker: false });
           } else {
-            simplemde.toTextArea();
-            simplemde = null;
+            if (simplemde) {
+              simplemde.toTextArea();
+              simplemde = null;
+            }
             $('#summernote').summernote();
           }
         }
