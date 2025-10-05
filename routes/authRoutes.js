@@ -57,7 +57,7 @@ router.post('/login', xsrf, async (req, res) => {
 
 // 로그아웃
 router.get('/logout', (req, res) => {
-  req.session.destroy();
+  if (req.session.user) req.session.destroy();
   res.redirect('/');
 });
 
