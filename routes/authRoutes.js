@@ -2,19 +2,19 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const User = require('../models/User');
-const requireLogin = require('../middleware/auth');
+const { requireLogin, permRegister } = require('../middleware/auth');
 const xsrf = require('../middleware/xsrf');
 const router = express.Router();
 
 // 회원가입 폼
-router.get('/register', requireLogin, (req, res) => {
+router.get('/register', permRegister, (req, res) => {
   const token = req.session.token || crypto.randomBytes(16).toString('hex');
   req.session.token = token;
   res.render('register', { token });
 });
 
 // 회원가입 처리
-router.post('/register', requireLogin, xsrf, async (req, res) => {
+router.post('/register', permRegister, xsrf, async (req, res) => {
   const { username, password, email } = req.body;
   const hashedPw = await bcrypt.hash(password, 10);
   try {
