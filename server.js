@@ -48,6 +48,10 @@ app.use(expressLayouts);
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.user;
   res.locals.defaultHost = process.env.HOST;
+  res.locals.siteName = process.env.BLOG_NAME;
+  res.locals.siteDefaultTitle = process.env.BLOG_DEFAULT_TITLE;
+  res.locals.siteDefaultDesc = process.env.BLOG_DEFAULT_DESC;
+  res.locals.siteLang = process.env.BLOG_LANG;
   next();
 });
 

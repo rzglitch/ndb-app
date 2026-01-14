@@ -1,52 +1,108 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="<%= siteLang %>">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title><%= typeof seo !== 'undefined' ? seo.title + ' | ⭐️ kh.me.kr ⭐️' : '⭐️ kh.me.kr ⭐️' %></title>
-  <link rel="stylesheet" href="/css/default.css" />
+  <title><%= typeof seo !== 'undefined' ? `${seo.title} | ${siteName}` : siteName %></title>
   <link rel="stylesheet" href="/summernote/summernote-lite.min.css" />
   <link rel="stylesheet" href="/simplemde/simplemde.min.css" />
-  <script src="/js/dayjs.min.js"></script>
+  <link rel="stylesheet" href="/css/markdown.css" />
+  <link rel="stylesheet" href="/css/tailwind.css" />
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.3/dist/cdn.min.js"></script>
   <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/summernote/summernote-lite.min.js"></script>
   <script type="text/javascript" src="/simplemde/simplemde.min.js"></script>
 
   <!-- SEO -->
   <% if (typeof seo !== 'undefined') { %>
-  <meta name="description" content="<%= seo.content %>" />
-	<meta property="url" content="<%= defaultHost %>/post/<%= post._id %>"/>
-	<meta property="og:url" content="<%= defaultHost %>/post/<%= post._id %>" />
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="<%= seo.title %>" />
-	<meta property="og:description" content="<%= seo.content %>" />
-	<meta property="og:image" content="<%= defaultHost %>/img/cover.jpg" />
+    <meta name="description" content="<%= seo.content %>" />
+    <meta property="url" content="<%= defaultHost %>/post/<%= post._id %>"/>
+    <meta property="og:url" content="<%= defaultHost %>/post/<%= post._id %>" />
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="<%= seo.title %>" />
+    <meta property="og:description" content="<%= seo.content %>" />
+    <meta property="og:image" content="<%= defaultHost %>/img/cover.jpg" />
   <% } else { %>
-  <meta name="description" content="My personal blog" />
-	<meta property="url" content="<%= defaultHost %>"/>
-	<meta property="og:url" content="<%= defaultHost %>" />
-	<meta property="og:type" content="website">
-	<meta property="og:title" content="kh.me.kr" />
-	<meta property="og:description" content="My personal blog" />
-	<meta property="og:image" content="<%= defaultHost %>/img/cover.jpg" />
+    <meta name="description" content="<%= siteDefaultDesc %>" />
+    <meta property="url" content="<%= defaultHost %>"/>
+    <meta property="og:url" content="<%= defaultHost %>" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= siteDefaultTitle %>" />
+    <meta property="og:description" content="<%= siteDefaultDesc %>" />
+    <meta property="og:image" content="<%= defaultHost %>/img/cover.jpg" />
   <% } %>
 </head>
 <body>
-  <header>
-    <h1 style="text-align:center"><a href="/">⭐️ kh.me.kr ⭐️</a></h1>
-    <nav>
-      <a href="/">홈</a> | 
-      <a href="/categories">카테고리</a> | 
-      <% if (currentUser) { %>
-      <span><%= currentUser.username %>님</span> | 
-      <a href="/create">글쓰기</a> | 
-      <a href="/logout">로그아웃</a> | 
-      <a href="/register">회원가입</a>
-      <% } else { %>
-      <a href="/login">로그인</a>
-      <% } %>
-    </nav>
-    <hr />
+  <header class="w-full border-b border-gray-300 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="h-12 sm:h-16 flex items-center justify-between">
+  
+        <!-- Left: Logo -->
+        <div class="flex items-center gap-8">
+          <a href="/">
+            <h1 class="text-l sm:text-xl font-semibold text-gray-900">
+              <%= siteName %>
+            </h1>
+          </a>
+
+          <!-- Desktop Menu -->
+          <nav class="hidden md:flex items-center gap-8 text-gray-600 text-sm">
+            <a href="/" class="hover:text-black">홈</a>
+            <a href="/categories" class="hover:text-black">카테고리</a>
+            <% if (currentUser) { %>
+              <a href="/create" class="hover:text-black">글쓰기</a>
+              <a href="/register" class="hover:text-black">회원가입</a>
+              <a href="/logout" class="hover:text-black">로그아웃</a>
+            <% } %>
+          </nav>
+        </div>
+  
+        <!-- Right -->
+        <div class="flex items-center text-gray-600 text-sm">
+  
+          <!-- Avatar -->
+          <% if (currentUser) { %>
+            <img src="/img/user.png" class="w-9 h-9 rounded-full object-cover" />
+          <% } else { %>
+            <a href="/login" class="hover:text-black">로그인</a>
+          <% } %>
+  
+          <div x-data="{ open: false }">
+            <!-- Mobile Menu Button -->
+            <button
+              class="md:hidden w-5 h-9 ms-4 flex flex-col items-center justify-center gap-[5px] cursor-pointer"
+              @click="open = ! open">
+              <span class="w-5 h-[2px] bg-gray-900"></span>
+              <span class="w-5 h-[2px] bg-gray-900"></span>
+              <span class="w-5 h-[2px] bg-gray-900"></span>
+            </button>
+
+            <template x-teleport="body">
+              <div x-show="open">
+                <div id="menu" class="fixed z-999 top-0 left-0 w-full h-full flex justify-center items-center bg-white">
+                  <a href="javascript:void(0)"
+                    class="fixed top-2 right-4 text-gray-700 hover:text-gray-400 text-4xl font-semibold duration-300"
+                    @click="open = false">&times;</a>
+                  <div class="flex flex-col text-gray-700 text-center text-xl font-light space-y-3">
+                    <a href="/" class="hover:text-gray-400 duration-300">홈</a>
+                    <a href="/categories" class="hover:text-gray-400 duration-300">카테고리</a>
+                    <% if (currentUser) { %>
+                      <a href="/create" class="hover:text-gray-400 duration-300">글쓰기</a>
+                      <a href="/register" class="hover:text-gray-400 duration-300">회원가입</a>
+                      <a href="/logout" class="hover:text-gray-400 duration-300">로그아웃</a>
+                    <% } else { %>
+                      <a href="/login" class="hover:text-gray-400 duration-300">로그인</a>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          
+        </div>
+      </div>
+    </div>
   </header>
   <main>
     <%- body %>

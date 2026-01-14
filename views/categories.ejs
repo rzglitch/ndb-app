@@ -1,25 +1,31 @@
-<div class="container">
-  <h2>카테고리</h2>
+<section class="py-16">
+  <div class="max-w-5xl mx-auto px-6">
 
-  <% if (currentUser) { %>
-  <form action="/category" method="POST">
-    <input type="hidden" name="_token" value="<%= token %>" />
-    <input type="text" name="name" placeholder="새 카테고리 이름" required />
-    <button type="submit">추가</button>
-  </form>
-  <% } %>
+    <!-- Section Header -->
+    <div class="mb-10">
+      <h2 class="text-3xl font-bold text-gray-900">카테고리</h2>
+    </div>
 
-  <ul>
-    <% categories.forEach(cat => { %>
-      <li>
-        <a href="/?category=<%= cat.name %>"><%= cat.name %></a>
-        <% if (currentUser) { %>
-        <form action="/category/<%= cat._id %>/delete" method="POST" style="display:inline;">
-          <input type="hidden" name="_token" value="<%= token %>" />
-          <button type="submit">삭제</button>
-        </form>
-        <% } %>
-      </li>
-    <% }) %>
-  </ul>
-</div>
+    <% if (currentUser) { %>
+    <form action="/category" method="POST">
+      <input type="hidden" name="_token" value="<%= token %>" />
+      <input type="text" name="name" placeholder="새 카테고리 이름" class="border rounded-lg border-gray-500 px-2 py-1 text-sm box-border" required />
+      <button type="submit" class="bg-gray-600 text-white px-2 py-1 rounded-lg text-sm hover:bg-gray-900 transition">추가</button>
+    </form>
+    <% } %>
+
+    <ul class="mt-4">
+      <% categories.forEach(cat => { %>
+        <li class="py-2 px-4 flex gap-2 border-b border-gray-300 last:border-b-0">
+          <a href="/?category=<%= cat.name %>"><%= cat.name %></a>
+          <% if (currentUser) { %>
+          <form action="/category/<%= cat._id %>/delete" method="POST" style="display:inline;">
+            <input type="hidden" name="_token" value="<%= token %>" />
+            <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded-lg text-sm hover:bg-red-900 transition">삭제</button>
+          </form>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</section>

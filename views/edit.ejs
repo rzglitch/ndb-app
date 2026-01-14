@@ -1,52 +1,85 @@
-<div class="container">
-  <h2>글 수정</h2>
-  <form action="/post/<%= post._id %>?_method=PUT" method="POST">
+<form action="/" method="POST">
+  <div>
     <input type="hidden" name="_token" value="<%= token %>" />
-    <label>카테고리 선택:</label>
-    <select name="category" required>
-      <% categories.forEach(cat => { %>
-        <option value="<%= cat.name %>" <%= post.category === cat.name ? "selected" : "" %>>
-          <%= cat.name %>
-        </option>
-      <% }) %>
-    </select>
-    <select name="status" required>
-      <option value="" <%= !post.status ? "selected" : "" %>>상태</option>
-      <option value="public" <%= post.status === 'public' ? "selected" : "" %>>공개</option>
-      <option value="private" <%= post.status === 'private' ? "selected" : "" %>>비공개</option>
-    </select>
-    <input type='radio' name='is_markdown' id="write-html" value='0' <%= !post.isMarkdown ? "checked" : "" %> />
-    <label for="write-html">HTML</label>
-    <input type='radio' name='is_markdown' id="write-md" value='1' <%= post.isMarkdown ? "checked" : "" %> />
-    <label for="write-md">Markdown</label>
-    <br /><br />
-    <input type="text" name="title" value="<%= post.title %>" placeholder="제목" style="width:100%;box-sizing:border-box" required /><br /><br />
-    <textarea name="content" id="summernote" placeholder="내용" required><%= post.content %></textarea><br /><br />
-    <script>
-      $(document).ready(function() {
-        let simplemde = null;
 
-        const currentMode = () => {
-          const writeMode = parseInt($('input[name="is_markdown"]:checked').val());
-          if (writeMode) {
-            $('#summernote').summernote('destroy');
-            simplemde = new SimpleMDE({ spellChecker: false });
-          } else {
-            if (simplemde) {
-              simplemde.toTextArea();
-              simplemde = null;
+    <!-- Top Bar -->
+    <div class="border-b bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+
+        <h1 class="text-lg font-semibold">글 수정</h1>
+
+        <div class="flex items-center gap-3">
+          <button type="submit" class="bg-black text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800">
+            수정
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+
+      <!-- Title -->
+      <input
+        type="text"
+        name="title"
+        value="<%= post.title %>"
+        placeholder="제목을 입력하세요"
+        class="w-full text-3xl sm:text-4xl font-bold border-none outline-none placeholder-gray-300"
+      />
+
+      <hr class="my-8" />
+
+      <!-- Meta -->
+      <div class="flex flex-wrap gap-3 mb-8">
+        <select name="category" required>
+          <% categories.forEach(cat => { %>
+            <option value="<%= cat.name %>" <%= post.category === cat.name ? "selected" : "" %>>
+              <%= cat.name %>
+            </option>
+          <% }) %>
+        </select>
+        <select name="status" required>
+          <option value="" <%= !post.status ? "selected" : "" %>>상태</option>
+          <option value="public" <%= post.status === 'public' ? "selected" : "" %>>공개</option>
+          <option value="private" <%= post.status === 'private' ? "selected" : "" %>>비공개</option>
+        </select>
+        <input type='radio' name='is_markdown' id="write-html" value='0' <%= !post.isMarkdown ? "checked" : "" %> />
+        <label for="write-html">HTML</label>
+        <input type='radio' name='is_markdown' id="write-md" value='1' <%= post.isMarkdown ? "checked" : "" %> />
+        <label for="write-md">Markdown</label>
+      </div>
+
+      <!-- Content -->
+      <textarea name="content" id="summernote" placeholder="내용" required
+        class="w-full min-h-[200px] resize-none border-none outline-none text-lg leading-relaxed placeholder-gray-400"><%= post.content %></textarea>
+
+      <script>
+        $(document).ready(function() {
+          let simplemde = null;
+
+          const currentMode = () => {
+            const writeMode = parseInt($('input[name="is_markdown"]:checked').val());
+            if (writeMode) {
+              $('#summernote').summernote('destroy');
+              simplemde = new SimpleMDE({ spellChecker: false });
+            } else {
+              if (simplemde) {
+                simplemde.toTextArea();
+                simplemde = null;
+              }
+              $('#summernote').summernote();
             }
-            $('#summernote').summernote();
           }
-        }
 
-        $('input[name="is_markdown"]:radio').change(function(){
+          $('input[name="is_markdown"]:radio').change(function(){
+            currentMode();
+          });
+
           currentMode();
         });
+      </script>
 
-        currentMode();
-      });
-    </script>
-    <button type="submit">수정 완료</button>
-  </form>
-</div>
+    </div>
+  </div>
+</form>

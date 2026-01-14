@@ -42,6 +42,7 @@ router.get('/', async (req, res) => {
 
   res.render('index', {
     posts,
+    postsJson: JSON.stringify(posts),
     currentPage: page,
     totalPages,
     category,
@@ -102,7 +103,7 @@ router.get('/post/:id', async (req, res) => {
       title: post.title.trim(),
       content: contentText.replaceAll('\n', ' ').trim(),
     };
-    res.render('detail', { post, seo, token, formatDate });
+    res.render('detail', { post, postJson: JSON.stringify(post), seo, token, formatDate });
   } catch (e) {
     console.log(e);
     return res.status(400).render('error', {
