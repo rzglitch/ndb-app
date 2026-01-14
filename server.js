@@ -52,6 +52,7 @@ app.use((req, res, next) => {
   res.locals.siteDefaultTitle = process.env.BLOG_DEFAULT_TITLE;
   res.locals.siteDefaultDesc = process.env.BLOG_DEFAULT_DESC;
   res.locals.siteLang = process.env.BLOG_LANG;
+  res.locals.assetsVer = process.env.ASSETS_VER;
   next();
 });
 
