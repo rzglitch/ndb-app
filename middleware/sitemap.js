@@ -4,7 +4,7 @@ const Post = require('../models/Post');
 const Category = require('../models/Category');
 
 async function getUrls () {
-  const findPost = await Post.find({})
+  const findPost = await Post.find({ status: 'public' })
   .select('_id')
   .lean();
   const findCategory = await Category.find({})
