@@ -7,6 +7,8 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const path = require('path');
+const expressSitemapXml = require('express-sitemap-xml');
+const getUrls = require('./middleware/sitemap');
 require('dotenv').config();
 
 const app = express();
@@ -39,6 +41,8 @@ app.use(
     store: new FileStore(fileStoreOptions),
   })
 );
+
+app.use(expressSitemapXml(getUrls, process.env.HOST));
 
 // 뷰 엔진
 app.set('view engine', 'ejs');

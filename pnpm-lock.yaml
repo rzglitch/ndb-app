@@ -38,6 +38,9 @@ importers:
       express-session:
         specifier: ^1.18.2
         version: 1.18.2
+      express-sitemap-xml:
+        specifier: ^3.1.0
+        version: 3.1.0
       helmet:
         specifier: ^8.1.0
         version: 8.1.0
@@ -470,6 +473,9 @@ packages:
     resolution: {integrity: sha512-SZjssGQC7TzTs9rpPDuUrR23GNZ9+2+IkA/+IJWmvQilTr5OSliEHGF+D9scbIpdC6yGtTI0/VhaHoVes2AN/A==}
     engines: {node: '>= 0.8.0'}
 
+  express-sitemap-xml@3.1.0:
+    resolution: {integrity: sha512-rhm4ydngymgQlUyKor2kiY9Xf3wWWb/tbXYVMvidxyA83D1JjKOqYo23clhMvwJ+fk2ht11KtJwcaHnhhdo4PQ==}
+
   express@5.1.0:
     resolution: {integrity: sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==}
     engines: {node: '>= 18'}
@@ -676,6 +682,10 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
+  map-age-cleaner@0.1.3:
+    resolution: {integrity: sha512-bJzx6nMoP6PDLPBFmg7+xRKeFZvFboMrGlxmNj9ClvX53KrmvM5bXFXEWjbz4cz1AFn+jWJ9z/DJSz7hrs0w3w==}
+    engines: {node: '>=6'}
+
   markdown-it@14.1.0:
     resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
     hasBin: true
@@ -713,6 +723,10 @@ packages:
   mime-types@3.0.1:
     resolution: {integrity: sha512-xRc4oEhT6eaBpU1XF7AjpOFD+xQmXNB5OVKwp4tqCuBpHLS/ZbBDrc07mYTDqVMg6PfxUjjNp85O6Cd2Z/5HWA==}
     engines: {node: '>= 0.6'}
+
+  mimic-fn@3.1.0:
+    resolution: {integrity: sha512-Ysbi9uYW9hFyfrThdDEQuykN4Ey6BuwPD2kpI5ES/nFTDn/98yxYNLZJcgUAKPT/mcrLLKaGzJR9YVxJrIdASQ==}
+    engines: {node: '>=8'}
 
   minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
@@ -814,6 +828,30 @@ packages:
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
+
+  p-defer@1.0.0:
+    resolution: {integrity: sha512-wB3wfAxZpk2AzOfUMJNL+d36xothRSyj8EXOa4f6GMqYDN9BJaaSISbsk+wS9abmnebVw95C2Kb5t85UmpCxuw==}
+    engines: {node: '>=4'}
+
+  p-limit@2.3.0:
+    resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
+    engines: {node: '>=6'}
+
+  p-memoize@4.0.4:
+    resolution: {integrity: sha512-ijdh0DP4Mk6J4FXlOM6vPPoCjPytcEseW8p/k5SDTSSfGV3E9bpt9Yzfifvzp6iohIieoLTkXRb32OWV0fB2Lw==}
+    engines: {node: '>=10'}
+
+  p-reflect@2.1.0:
+    resolution: {integrity: sha512-paHV8NUz8zDHu5lhr/ngGWQiW067DK/+IbJ+RfZ4k+s8y4EKyYCz8pGYWjxCg35eHztpJAt+NUgvN4L+GCbPlg==}
+    engines: {node: '>=8'}
+
+  p-settle@4.1.1:
+    resolution: {integrity: sha512-6THGh13mt3gypcNMm0ADqVNCcYa3BK6DWsuJWFCuEKP1rpY+OKGp7gaZwVmLspmic01+fsg/fN57MfvDzZ/PuQ==}
+    engines: {node: '>=10'}
+
+  p-try@2.2.0:
+    resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
+    engines: {node: '>=6'}
 
   parse-srcset@1.0.2:
     resolution: {integrity: sha512-/2qh0lav6CmI15FzA3i/2Bzk2zCgQhGMkvhOhKNcBVQ1ldgpbfiNTVslmooUmWJcADi1f1kIeynbDRVzNlfR6Q==}
@@ -1018,6 +1056,10 @@ packages:
 
   write-file-atomic@3.0.3:
     resolution: {integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==}
+
+  xmlbuilder@15.1.1:
+    resolution: {integrity: sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==}
+    engines: {node: '>=8.0'}
 
 snapshots:
 
@@ -1389,6 +1431,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  express-sitemap-xml@3.1.0:
+    dependencies:
+      p-memoize: 4.0.4
+      xmlbuilder: 15.1.1
+
   express@5.1.0:
     dependencies:
       accepts: 2.0.0
@@ -1613,6 +1660,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  map-age-cleaner@0.1.3:
+    dependencies:
+      p-defer: 1.0.0
+
   markdown-it@14.1.0:
     dependencies:
       argparse: 2.0.1
@@ -1648,6 +1699,8 @@ snapshots:
   mime-types@3.0.1:
     dependencies:
       mime-db: 1.54.0
+
+  mimic-fn@3.1.0: {}
 
   minimalistic-assert@1.0.1: {}
 
@@ -1726,6 +1779,27 @@ snapshots:
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
+
+  p-defer@1.0.0: {}
+
+  p-limit@2.3.0:
+    dependencies:
+      p-try: 2.2.0
+
+  p-memoize@4.0.4:
+    dependencies:
+      map-age-cleaner: 0.1.3
+      mimic-fn: 3.1.0
+      p-settle: 4.1.1
+
+  p-reflect@2.1.0: {}
+
+  p-settle@4.1.1:
+    dependencies:
+      p-limit: 2.3.0
+      p-reflect: 2.1.0
+
+  p-try@2.2.0: {}
 
   parse-srcset@1.0.2: {}
 
@@ -1949,3 +2023,5 @@ snapshots:
       is-typedarray: 1.0.0
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
+
+  xmlbuilder@15.1.1: {}

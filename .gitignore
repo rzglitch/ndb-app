@@ -143,3 +143,5 @@ vite.config.ts.timestamp-*
 .DS_Store
 sessions/
 tailwind.css
+public/google*.html
+public/naver*.html
