@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title><%= typeof seo !== 'undefined' ? `${seo.title} | ${siteName}` : siteName %></title>
-  <link rel="stylesheet" href="/summernote/summernote-lite.min.css" />
-  <link rel="stylesheet" href="/simplemde/simplemde.min.css" />
+  <link rel="stylesheet" href="/summernote/summernote-lite.min.css?v=<%= assetsVer %>" />
+  <link rel="stylesheet" href="/simplemde/simplemde.min.css?v=<%= assetsVer %>" />
   <link rel="stylesheet" href="/css/markdown.css?v=<%= assetsVer %>" />
   <link rel="stylesheet" href="/css/tailwind.css?v=<%= assetsVer %>" />
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script defer src="/js/alpine.extends.js?v=<%= assetsVer %>"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.3/dist/cdn.min.js"></script>
   <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/summernote/summernote-lite.min.js"></script>

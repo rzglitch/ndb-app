@@ -1,7 +1,3 @@
-<script>
-  const blogItems = <%- postsJson %>;
-</script>
-
 <section class="py-16">
   <div class="max-w-5xl mx-auto px-6">
 
@@ -11,37 +7,7 @@
     </div>
 
     <!-- Blog List -->
-    <ul class="" x-data="{
-          items: blogItems
-      }">
-      <template x-for="item in items">
-        <!-- Blog Item -->
-        <li class="py-6 flex gap-6 border-b border-gray-300 last:border-b-0">
-          <div style="min-width:150px" class="hidden sm:block">
-            <a class="text-sm text-gray-500 font-semibold" x-bind:href="`/?category=${item.category}`"
-              x-text="item.category"></a>
-          </div>
-          <div class="flex-1">
-            <p class="block sm:hidden">
-              <a class="text-sm text-gray-500 font-semibold" x-bind:href="`/?category=${item.category}`"
-              x-text="item.category"></a>
-            </p>
-            <a class="text-xl font-bold text-gray-900" x-text="item.title" x-bind:href="`/post/${item._id}`"></a>
-
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <img src="/img/user.png" class="w-8 h-8 rounded-full" />
-                <div class="text-sm">
-                  <p class="font-semibold text-gray-900" x-text="item.author"></p>
-                  <p class="text-gray-500 text-xs"><span x-text="dayjs(item.createdAt).format('MMM D, YYYY')"></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </template>
-    </ul>
+    <%- t %>
 
     <div class="mt-12 flex items-center justify-center">
       <nav class="flex items-center gap-1">

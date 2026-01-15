@@ -12,6 +12,7 @@ const htmlToText = require('html-to-text');
 const markdownit = require('markdown-it');
 
 const xsrf = require('../middleware/xsrf');
+const compile = require('../util/compile');
 
 const formatDate = (i) => {
   dayjs.extend(utc);
@@ -40,6 +41,7 @@ router.get('/', async (req, res) => {
     .skip(skip)
     .limit(limit);
 
+  const template = await compile('index', { posts });
   res.render('index', {
     posts,
     postsJson: JSON.stringify(posts),
@@ -47,6 +49,7 @@ router.get('/', async (req, res) => {
     totalPages,
     category,
     formatDate,
+    t: template
   });
 });
 
@@ -103,7 +106,13 @@ router.get('/post/:id', async (req, res) => {
       title: post.title.trim(),
       content: contentText.replaceAll('\n', ' ').trim(),
     };
-    res.render('detail', { post, postJson: JSON.stringify(post), seo, token, formatDate });
+    const template = await compile('detail', {
+      post,
+      links: {
+        category: `/?category=${post.category}`
+      }
+    });
+    res.render('detail', { post, postJson: JSON.stringify(post), seo, token, formatDate, t: template });
   } catch (e) {
     console.log(e);
     return res.status(400).render('error', {

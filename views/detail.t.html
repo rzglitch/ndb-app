@@ -1,0 +1,38 @@
+<article>
+  <!-- Cover -->
+  <div class="w-full h-50 sm:h-60 md:h-[300px] overflow-hidden"
+    style="background: repeat url('/img/tile.png')"
+    :alt="data.post.title">
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-5xl mx-auto px-0 sm:px-6 -mt-24 sm:-mt-32 md:-mt-48 relative">
+    <div class="bg-white rounded-none sm:rounded-2xl shadow-lg p-5 sm:p-8 md:p-10">
+
+      <!-- Category -->
+      <a x-text="data.post.category" :href="data.links.category" class="inline-block text-xs sm:text-sm font-semibold text-gray-500"></a>
+
+      <!-- Title -->
+      <h1 x-text="data.post.title"
+        class="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 leading-snug sm:leading-tight">
+      </h1>
+
+      <!-- Meta -->
+      <div class="mt-4 sm:mt-6 flex items-center gap-3 sm:gap-4">
+        <img src="/img/user.png" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full" />
+        <div>
+          <p class="text-sm font-semibold text-gray-900" x-text="data.post.author"></p>
+          <p class="text-xs text-gray-500" x-data x-text="data.post.createdAt" x-formatted-date></p>
+        </div>
+      </div>
+
+      <div x-data x-component="control"></div>
+
+      <!-- Divider -->
+      <hr class="my-6 sm:my-8" />
+
+      <!-- Post Content -->
+      <div class="prose prose-sm sm:prose-base lg:prose-lg max-w-none markdown-body" x-html="data.post.content"></div>
+    </div>
+  </div>
+</article>
