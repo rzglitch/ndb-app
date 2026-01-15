@@ -84,6 +84,11 @@ router.get('/post/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
+    if (!post)
+      return res.status(404).render('error', {
+        err: { message: '글을 찾을 수 없습니다.' },
+      });
+
     if ((!post.status || post.status !== 'public') && !req.session.user)
       return res.status(404).render('error', {
         err: { message: '글을 찾을 수 없습니다.' },
