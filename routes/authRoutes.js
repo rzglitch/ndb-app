@@ -51,7 +51,12 @@ router.post('/login', xsrf, async (req, res) => {
       err: { message: '비밀번호가 올바르지 않습니다.' },
     });
 
+  if (req.body.remember) {
+    req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 30;
+  }
+
   req.session.user = { id: user._id, username: user.username };
+
   res.redirect('/');
 });
 
